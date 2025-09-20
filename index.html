@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Warehouse Inventory Tracker</title>
-     <link rel="icon" type="image/png"
-        href="//baniwomen.com/cdn/shop/files/baniwomen-icon.png?crop=center&height=32&v=1706881484&width=32">
+     <link rel="icon" type="image/png" href="//baniwomen.com/cdn/shop/files/baniwomen-icon.png?crop=center&height=32&v=1706881484&width=32">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -82,62 +81,62 @@
             </div>
         </header>
 
-        <!-- File Management and Watchlist -->
+        <!-- Control Section -->
         <div class="row mb-4">
-            <div class="col-lg-5 mb-4 mb-lg-0 upload-section">
+            <div class="col-xl-4 col-lg-6 mb-4">
                 <div class="card h-100">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Manage Reports</h5>
-                    </div>
+                    <div class="card-header"><h5 class="card-title mb-0">Manage Reports</h5></div>
                     <div class="card-body d-flex flex-column">
                         <p>Upload your latest inventory reports.</p>
                         <div class="mb-3">
                             <label for="sjitInvFile" class="form-label">SJIT Inventory Report</label>
-                            <div class="input-group">
-                                <input type="file" class="form-control" id="sjitInvFile" accept=".csv, .xls, .xlsx">
-                                <button class="btn btn-outline-secondary" type="button" onclick="deleteFile('sjitInvFile', 'sjitInvFileName')"><i class="bi bi-trash"></i></button>
-                            </div>
-                             <small id="sjitInvFileName" class="d-block mt-1 text-muted"></small>
+                            <div class="input-group"><input type="file" class="form-control" id="sjitInvFile" accept=".csv, .xls, .xlsx"><button class="btn btn-outline-secondary" type="button" onclick="deleteFile('sjitInvFile', 'sjitInvFileName')"><i class="bi bi-trash"></i></button></div>
+                            <small id="sjitInvFileName" class="d-block mt-1 text-muted"></small>
                         </div>
                         <div class="mb-3">
                             <label for="delhiInvFile" class="form-label">Delhi Warehouse Report (BIN)</label>
-                            <div class="input-group">
-                                <input type="file" class="form-control" id="delhiInvFile" accept=".csv, .xls, .xlsx">
-                                 <button class="btn btn-outline-secondary" type="button" onclick="deleteFile('delhiInvFile', 'delhiInvFileName')"><i class="bi bi-trash"></i></button>
-                            </div>
+                            <div class="input-group"><input type="file" class="form-control" id="delhiInvFile" accept=".csv, .xls, .xlsx"><button class="btn btn-outline-secondary" type="button" onclick="deleteFile('delhiInvFile', 'delhiInvFileName')"><i class="bi bi-trash"></i></button></div>
                             <small id="delhiInvFileName" class="d-block mt-1 text-muted"></small>
                         </div>
-                         <button class="btn btn-primary mt-auto" onclick="processFiles()">Process Inventory</button>
+                        <button class="btn btn-primary mt-auto" onclick="processFiles()">Process Inventory</button>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 watchlist-section">
+
+            <div class="col-xl-4 col-lg-6 mb-4">
                 <div class="card h-100">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Top SKUs Watchlist</h5>
+                    <div class="card-header"><h5 class="card-title mb-0">Bulk SKU Lookup</h5></div>
+                    <div class="card-body d-flex flex-column">
+                        <p>Upload a CSV with a single 'SKUs' column to get a specific report.</p>
+                         <div class="mb-3">
+                            <label for="bulkSkuFile" class="form-label">SKU List File</label>
+                            <div class="input-group"><input type="file" class="form-control" id="bulkSkuFile" accept=".csv"><button class="btn btn-outline-secondary" type="button" onclick="deleteFile('bulkSkuFile', 'bulkSkuFileName')"><i class="bi bi-trash"></i></button></div>
+                            <small id="bulkSkuFileName" class="d-block mt-1 text-muted"></small>
+                        </div>
+                        <div class="mt-auto">
+                            <button class="btn btn-info w-100" onclick="handleBulkLookup()">Generate Report from List</button>
+                        </div>
                     </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-12 mb-4">
+                <div class="card h-100">
+                    <div class="card-header"><h5 class="card-title mb-0">Top SKUs Watchlist</h5></div>
                     <div class="card-body">
                         <div class="row g-2 mb-3">
-                            <div class="col-sm-5">
-                                <input type="text" id="watchlistSkuInput" class="form-control" placeholder="Enter Local SKU">
-                            </div>
-                             <div class="col-sm-3">
+                            <div class="col-sm-5"><input type="text" id="watchlistSkuInput" class="form-control" placeholder="Enter Local SKU"></div>
+                            <div class="col-sm-3">
                                 <select class="form-select" id="watchlistType">
                                     <option value="total" selected>Total Stock</option>
                                     <option value="sjit">SJIT Stock</option>
                                     <option value="delhi">Delhi Stock</option>
                                 </select>
                             </div>
-                            <div class="col-sm-2">
-                                <input type="number" id="watchlistLimitInput" class="form-control" placeholder="Limit">
-                            </div>
-                            <div class="col-sm-2">
-                                <button class="btn btn-success w-100" type="button" onclick="addToWatchlist()">Add</button>
-                            </div>
+                            <div class="col-sm-2"><input type="number" id="watchlistLimitInput" class="form-control" placeholder="Limit"></div>
+                            <div class="col-sm-2"><button class="btn btn-success w-100" type="button" onclick="addToWatchlist()">Add</button></div>
                         </div>
-                        <ul id="watchlist" class="list-group">
-                           <!-- Watchlist items will be added here -->
-                        </ul>
+                        <ul id="watchlist" class="list-group"></ul>
                     </div>
                 </div>
             </div>
@@ -147,37 +146,20 @@
         <div class="card">
             <div class="card-header">
                  <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <h5 class="card-title mb-0">Consolidated Inventory</h5>
-                    </div>
-                    <div class="col-md-6">
-                         <input type="text" id="searchInput" class="form-control bg-light" placeholder="Search by any SKU...">
+                    <div class="col-md-6"><h5 class="card-title mb-0" id="inventoryTableTitle">Consolidated Inventory</h5></div>
+                    <div class="col-md-6" id="tableControls">
+                        <div id="search-wrapper">
+                            <input type="text" id="searchInput" class="form-control bg-light" placeholder="Search by any SKU...">
+                        </div>
+                        <div id="filter-controls" style="display: none;">
+                             <button class="btn btn-success btn-sm" onclick="exportResultsToCSV()"><i class="bi bi-download"></i> Export Results</button>
+                             <button class="btn btn-secondary btn-sm" onclick="renderInventoryTable(true)"><i class="bi bi-x-circle"></i> Clear Filter</button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover mb-0">
-                        <thead class="sticky-header">
-                            <tr>
-                                <th>Local SKU</th>
-                                <th>Style ID</th>
-                                <th>Total Stock</th>
-                                <th>SJIT Overall</th>
-                                <th>SJIT Mumbai</th>
-                                <th>SJIT Binola</th>
-                                <th>SJIT Bangalore</th>
-                                <th>Delhi Warehouse</th>
-                            </tr>
-                        </thead>
-                        <tbody id="inventoryTableBody">
-                           <!-- Inventory data will be loaded here -->
-                        </tbody>
-                        <tfoot id="inventoryTableFooter">
-                            <!-- Totals will be loaded here -->
-                        </tfoot>
-                    </table>
-                </div>
+                <div class="table-responsive"><table class="table table-striped table-hover mb-0"><thead class="sticky-header"><tr><th>Local SKU</th><th>Style ID</th><th>Total Stock</th><th>SJIT Overall</th><th>SJIT Mumbai</th><th>SJIT Binola</th><th>SJIT Bangalore</th><th>Delhi Warehouse</th></tr></thead><tbody id="inventoryTableBody"></tbody><tfoot id="inventoryTableFooter"></tfoot></table></div>
             </div>
         </div>
     </div>
@@ -185,12 +167,8 @@
     <!-- Toast Notification -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
       <div id="appToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-          <strong class="me-auto" id="toastTitle"></strong>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-        <div class="toast-body" id="toastBody">
-        </div>
+        <div class="toast-header"><strong class="me-auto" id="toastTitle"></strong><button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button></div>
+        <div class="toast-body" id="toastBody"></div>
       </div>
     </div>
 
@@ -202,7 +180,22 @@
         // Global data stores
         let masterSkuMap = new Map();
         let inventoryData = new Map();
+        let filteredInventoryData = new Map();
         let watchlist = new Map();
+
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('sjitInvFile').addEventListener('change', (e) => handleFileSelect(e, 'sjitInvFileName'));
+            document.getElementById('delhiInvFile').addEventListener('change', (e) => handleFileSelect(e, 'delhiInvFileName'));
+            document.getElementById('bulkSkuFile').addEventListener('change', (e) => handleFileSelect(e, 'bulkSkuFileName'));
+            document.getElementById('searchInput').addEventListener('keyup', () => renderInventoryTable(false));
+
+            loadMasterSkuFile(); 
+            loadFromLocalStorage();
+            if ('Notification' in window) {
+                Notification.requestPermission();
+            }
+        });
 
         // --- UI & NOTIFICATIONS ---
         function showToast(title, body, type = 'success') {
@@ -214,29 +207,22 @@
             toastTitleEl.textContent = title;
             toastBodyEl.innerHTML = body;
 
-            toastHeader.classList.remove('bg-success', 'bg-danger', 'bg-info', 'text-white');
-            if (type === 'success') {
-                toastHeader.classList.add('bg-success', 'text-white');
-            } else if (type === 'danger') {
-                toastHeader.classList.add('bg-danger', 'text-white');
-            } else if (type === 'info') {
-                 toastHeader.classList.add('bg-info', 'text-white');
-            }
+            toastHeader.className = 'toast-header'; // Reset classes
+            const typeClasses = {
+                success: 'bg-success text-white',
+                danger: 'bg-danger text-white',
+                info: 'bg-info text-white'
+            };
+            toastHeader.classList.add(...(typeClasses[type] || '').split(' '));
+            
             const toast = new bootstrap.Toast(toastEl);
             toast.show();
         }
 
         // --- FILE HANDLING ---
-        document.getElementById('sjitInvFile').addEventListener('change', (e) => handleFileSelect(e, 'sjitInvFileName'));
-        document.getElementById('delhiInvFile').addEventListener('change', (e) => handleFileSelect(e, 'delhiInvFileName'));
-        document.getElementById('searchInput').addEventListener('keyup', renderInventoryTable);
-
-
         function handleFileSelect(event, labelId) {
             const file = event.target.files[0];
-            if (file) {
-                document.getElementById(labelId).textContent = `Selected: ${file.name}`;
-            }
+            document.getElementById(labelId).textContent = file ? `Selected: ${file.name}` : '';
         }
 
         function deleteFile(inputId, labelId) {
@@ -248,25 +234,14 @@
             return new Promise((resolve, reject) => {
                 const fileName = file.name.toLowerCase();
                 if (fileName.endsWith('.csv')) {
-                    Papa.parse(file, {
-                        header: true,
-                        skipEmptyLines: true,
-                        complete: (results) => resolve(results.data),
-                        error: (error) => reject(error),
-                    });
+                    Papa.parse(file, { header: true, skipEmptyLines: true, complete: (results) => resolve(results.data), error: (error) => reject(new Error(`CSV Parsing Error: ${error.message}`)) });
                 } else if (fileName.endsWith('.xls') || fileName.endsWith('.xlsx')) {
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         try {
-                            const data = new Uint8Array(e.target.result);
-                            const workbook = XLSX.read(data, { type: 'array' });
-                            const firstSheetName = workbook.SheetNames[0];
-                            const worksheet = workbook.Sheets[firstSheetName];
-                            const json = XLSX.utils.sheet_to_json(worksheet);
-                            resolve(json);
-                        } catch (err) {
-                            reject(err);
-                        }
+                            const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+                            resolve(XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]));
+                        } catch (err) { reject(err); }
                     };
                     reader.onerror = (error) => reject(error);
                     reader.readAsArrayBuffer(file);
@@ -279,44 +254,33 @@
         async function loadMasterSkuFile() {
             try {
                 const response = await fetch('AK.csv');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const csvText = await response.text();
-                const masterData = Papa.parse(csvText, {
-                    header: true,
-                    skipEmptyLines: true,
-                }).data;
+                const masterData = Papa.parse(csvText, { header: true, skipEmptyLines: true }).data;
 
                 masterSkuMap.clear();
                 masterData.forEach(row => {
                     const localSku = row.Local_SKU;
                     if (localSku) {
-                        masterSkuMap.set(localSku, { myntra: row.Myntra_SKU, nykaa: row.Nykaa_SKU, ajio: row.AJIO_SKU });
-                        if (row.Myntra_SKU) masterSkuMap.set(row.Myntra_SKU, { local: localSku });
-                        if (row.SKU_ID) masterSkuMap.set(row.SKU_ID, { local: localSku });
-                        if (row.Nykaa_SKU) masterSkuMap.set(row.Nykaa_SKU, { local: localSku });
+                        const styleId = row['Myntra Style ID'];
+                        masterSkuMap.set(localSku, { myntra: row.Myntra_SKU, nykaa: row.Nykaa_SKU, ajio: row.AJIO_SKU, styleId });
+                        if (row.Myntra_SKU) masterSkuMap.set(row.Myntra_SKU, { local: localSku, styleId });
+                        if (row.SKU_ID) masterSkuMap.set(row.SKU_ID, { local: localSku, styleId });
+                        if (row.Nykaa_SKU) masterSkuMap.set(row.Nykaa_SKU, { local: localSku, styleId });
                     }
                 });
             } catch (error) {
                 console.error("Could not load Master SKU Mapping file:", error);
-                showToast("Error", "Could not load 'Master_SKU_Mapping.csv'. Please ensure it's in the same folder as this HTML file.", 'danger');
+                showToast("Error", "Could not load 'Master_SKU_Mapping.csv'. Please ensure it's in the same folder.", 'danger');
             }
         }
 
         async function processFiles() {
-            if (masterSkuMap.size === 0) {
-                showToast('Error', 'Master SKU file is not loaded. Ensure "Master_SKU_Mapping.csv" is in the same folder and refresh.', 'danger');
-                return;
-            }
-
+            if (masterSkuMap.size === 0) return showToast('Error', 'Master SKU file is not loaded. Ensure "Master_SKU_Mapping.csv" is present and refresh.', 'danger');
+            
             const sjitFile = document.getElementById('sjitInvFile').files[0];
             const delhiFile = document.getElementById('delhiInvFile').files[0];
-            
-            if (!sjitFile && !delhiFile) {
-                showToast('Error', 'Please upload at least one inventory report.', 'danger');
-                return;
-            }
+            if (!sjitFile && !delhiFile) return showToast('Error', 'Please upload at least one inventory report.', 'danger');
 
             inventoryData.clear();
             
@@ -325,20 +289,15 @@
                     const sjitData = await parseFile(sjitFile);
                     sjitData.forEach(row => {
                         const sku = row['seller sku code'] || row['sku id'];
-                        const styleId = row['style id'];
-                        const warehouse = row['warehouse name']?.toLowerCase();
+                        const warehouse = row['warehouse name']?.toLowerCase() || '';
                         const stock = parseInt(row['inventory count'], 10) || 0;
-                        
                         const mapping = masterSkuMap.get(sku);
-                        if (mapping?.local && stock > 0) {
+                        if (mapping?.local) {
                             const localSku = mapping.local;
-                            if (!inventoryData.has(localSku)) {
-                                inventoryData.set(localSku, createEmptyInventoryRecord());
-                            }
+                            if (!inventoryData.has(localSku)) inventoryData.set(localSku, createEmptyInventoryRecord());
                             const record = inventoryData.get(localSku);
-                            record.styleId = styleId || record.styleId;
+                            record.styleId = mapping.styleId || record.styleId;
                             record.sjit.total += stock;
-
                             if (warehouse.includes('mumbai')) record.sjit.mumbai += stock;
                             else if (warehouse.includes('binola')) record.sjit.binola += stock;
                             else if (warehouse.includes('bangalore')) record.sjit.bangalore += stock;
@@ -349,51 +308,99 @@
                 if (delhiFile) {
                     const delhiData = await parseFile(delhiFile);
                     delhiData.forEach(row => {
-                        const sku = row['internal code'];
+                        const localSku = row['internal code'];
                         const stock = parseInt(row['Total Stock'], 10) || 0;
-                        const localSku = sku;
-                        
-                        if (inventoryData.has(localSku)) {
+                        if (masterSkuMap.has(localSku)) {
+                            if (!inventoryData.has(localSku)) inventoryData.set(localSku, createEmptyInventoryRecord());
                             const record = inventoryData.get(localSku);
                             record.delhi += stock;
-                        } else if (masterSkuMap.has(localSku) && stock > 0) {
-                             inventoryData.set(localSku, {
-                                ...createEmptyInventoryRecord(),
-                                delhi: stock
-                            });
+                            if (record.styleId === 'N/A') record.styleId = masterSkuMap.get(localSku).styleId;
                         }
                     });
                 }
                 
-                calculateTotals();
-                renderInventoryTable();
+                calculateTotals(inventoryData);
+                renderInventoryTable(true);
                 updateWatchlistDisplay();
                 localStorage.setItem('inventoryData', JSON.stringify(Array.from(inventoryData.entries())));
-                showToast('Success', '<i class="bi bi-check-circle-fill"></i> Inventory data loaded and processed successfully!', 'success');
+                showToast('Success', '<i class="bi bi-check-circle-fill"></i> Inventory processed successfully!', 'success');
 
             } catch (error) {
                 console.error("Error processing files:", error);
-                showToast('Error', `An error occurred while processing the files: ${error.message}`, 'danger');
+                showToast('Error', `File processing error: ${error.message}`, 'danger');
             }
         }
 
         function createEmptyInventoryRecord() {
-            return {
-                styleId: 'N/A',
-                sjit: { total: 0, mumbai: 0, binola: 0, bangalore: 0 },
-                delhi: 0,
-                total: 0
-            };
+            return { styleId: 'N/A', sjit: { total: 0, mumbai: 0, binola: 0, bangalore: 0 }, delhi: 0, total: 0 };
         }
 
-        function calculateTotals() {
-            for (let [sku, data] of inventoryData.entries()) {
-                data.total = data.sjit.total + data.delhi;
+        function calculateTotals(dataMap) {
+            for (let [sku, data] of dataMap.entries()) { data.total = data.sjit.total + data.delhi; }
+        }
+
+        // --- BULK LOOKUP & EXPORT ---
+        async function handleBulkLookup() {
+            if (inventoryData.size === 0) return showToast('Info', 'Please process your main inventory files first.', 'info');
+            
+            const lookupFile = document.getElementById('bulkSkuFile').files[0];
+            if (!lookupFile) return showToast('Error', 'Please select a SKU list file to look up.', 'danger');
+
+            try {
+                const lookupData = await parseFile(lookupFile);
+                filteredInventoryData.clear();
+                
+                lookupData.forEach(row => {
+                    const sku = row.SKUs || row.Sku || row.sku; // Check for common header names
+                    if (sku) {
+                        if (inventoryData.has(sku)) {
+                            filteredInventoryData.set(sku, inventoryData.get(sku));
+                        } else {
+                            const record = createEmptyInventoryRecord();
+                            if(masterSkuMap.has(sku)) record.styleId = masterSkuMap.get(sku).styleId || 'N/A';
+                            filteredInventoryData.set(sku, record);
+                        }
+                    }
+                });
+                renderInventoryTable(false, filteredInventoryData);
+                showToast('Success', `Report generated for ${filteredInventoryData.size} SKUs.`, 'success');
+            } catch (error) {
+                showToast('Error', `Could not process SKU list: ${error.message}`, 'danger');
             }
         }
 
+        function exportResultsToCSV() {
+            const dataToExport = filteredInventoryData;
+            if (dataToExport.size === 0) return showToast('Info', 'No data to export.', 'info');
+
+            const headers = ['Local SKU', 'Style ID', 'Total Stock', 'SJIT Overall', 'SJIT Mumbai', 'SJIT Binola', 'SJIT Bangalore', 'Delhi Warehouse'];
+            const csvRows = [headers.join(',')];
+
+            for (const [sku, data] of dataToExport.entries()) {
+                const row = [sku, data.styleId, data.total, data.sjit.total, data.sjit.mumbai, data.sjit.binola, data.sjit.bangalore, data.delhi];
+                csvRows.push(row.join(','));
+            }
+
+            const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'inventory_lookup_results.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         // --- RENDERING ---
-        function renderInventoryTable() {
+        function renderInventoryTable(isReset = false, dataSource = null) {
+            const isFiltered = dataSource !== null && !isReset;
+            const dataToRender = isFiltered ? dataSource : inventoryData;
+            
+            document.getElementById('inventoryTableTitle').textContent = isFiltered ? `Bulk Lookup Results (${dataToRender.size} SKUs)` : 'Consolidated Inventory';
+            document.getElementById('search-wrapper').style.display = isFiltered ? 'none' : 'block';
+            document.getElementById('filter-controls').style.display = isFiltered ? 'flex' : 'none';
+
             const tableBody = document.getElementById('inventoryTableBody');
             const tableFooter = document.getElementById('inventoryTableFooter');
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
@@ -401,30 +408,18 @@
             tableFooter.innerHTML = '';
 
             const totals = { total: 0, sjit: 0, mumbai: 0, binola: 0, bangalore: 0, delhi: 0 };
-            const sortedData = new Map([...inventoryData.entries()].sort());
+            const sortedData = new Map([...dataToRender.entries()].sort());
 
             for (let [localSku, data] of sortedData) {
-                const platformSkus = masterSkuMap.get(localSku) || {};
-                const myntraSku = platformSkus.myntra || '';
-                const nykaaSku = platformSkus.nykaa || '';
-
-                if (!localSku.toLowerCase().includes(searchTerm) && 
-                    !myntraSku.toLowerCase().includes(searchTerm) &&
-                    !nykaaSku.toLowerCase().includes(searchTerm)) {
-                    continue;
+                if (!isFiltered && searchTerm) {
+                    const platformSkus = masterSkuMap.get(localSku) || {};
+                    if (!localSku.toLowerCase().includes(searchTerm) && !(platformSkus.myntra || '').toLowerCase().includes(searchTerm) && !(platformSkus.nykaa || '').toLowerCase().includes(searchTerm)) {
+                        continue;
+                    }
                 }
 
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${localSku}</td>
-                    <td>${data.styleId}</td>
-                    <td>${data.total}</td>
-                    <td>${data.sjit.total}</td>
-                    <td>${data.sjit.mumbai}</td>
-                    <td>${data.sjit.binola}</td>
-                    <td>${data.sjit.bangalore}</td>
-                    <td>${data.delhi}</td>
-                `;
+                row.innerHTML = `<td>${localSku}</td><td>${data.styleId}</td><td>${data.total}</td><td>${data.sjit.total}</td><td>${data.sjit.mumbai}</td><td>${data.sjit.binola}</td><td>${data.sjit.bangalore}</td><td>${data.delhi}</td>`;
                 tableBody.appendChild(row);
 
                 totals.total += data.total;
@@ -437,15 +432,7 @@
             
             const footerRow = document.createElement('tr');
             footerRow.className = 'total-row';
-            footerRow.innerHTML = `
-                <td colspan="2">Grand Total</td>
-                <td>${totals.total}</td>
-                <td>${totals.sjit}</td>
-                <td>${totals.mumbai}</td>
-                <td>${totals.binola}</td>
-                <td>${totals.bangalore}</td>
-                <td>${totals.delhi}</td>
-            `;
+            footerRow.innerHTML = `<td colspan="2">Grand Total</td><td>${totals.total}</td><td>${totals.sjit}</td><td>${totals.mumbai}</td><td>${totals.binola}</td><td>${totals.bangalore}</td><td>${totals.delhi}</td>`;
             tableFooter.appendChild(footerRow);
         }
 
@@ -454,20 +441,12 @@
             const skuInput = document.getElementById('watchlistSkuInput');
             const limitInput = document.getElementById('watchlistLimitInput');
             const typeSelect = document.getElementById('watchlistType');
-            
             const sku = skuInput.value.trim();
             const limit = parseInt(limitInput.value, 10);
             const type = typeSelect.value;
 
-            if (!sku || isNaN(limit) || limit < 0) {
-                showToast('Warning', 'Please enter a valid SKU and a non-negative limit.', 'danger');
-                return;
-            }
-
-            if (!inventoryData.has(sku)) {
-                 showToast('Warning', 'This SKU does not exist in the processed inventory data.', 'danger');
-                 return;
-            }
+            if (!sku || isNaN(limit) || limit < 0) return showToast('Warning', 'Please enter a valid SKU and a non-negative limit.', 'danger');
+            if (!inventoryData.has(sku)) return showToast('Warning', 'This SKU does not exist in the processed inventory data.', 'danger');
             
             watchlist.set(sku, { limit, type });
             skuInput.value = '';
@@ -488,113 +467,64 @@
             let lowStockAlert = false;
 
             if (watchlist.size === 0) {
-                 listElement.innerHTML = '<li class="list-group-item text-muted">No SKUs are being watched.</li>';
-                 return;
+                listElement.innerHTML = '<li class="list-group-item text-muted">No SKUs are being watched.</li>';
+                return;
             }
 
             for(let [sku, settings] of watchlist.entries()) {
                 const data = inventoryData.get(sku) || createEmptyInventoryRecord();
-                let isBelowLimit = false;
                 let stockToCheck;
-
                 switch(settings.type) {
-                    case 'sjit':
-                        stockToCheck = data.sjit.total;
-                        break;
-                    case 'delhi':
-                        stockToCheck = data.delhi;
-                        break;
-                    case 'total':
-                    default:
-                        stockToCheck = data.total;
-                        break;
+                    case 'sjit': stockToCheck = data.sjit.total; break;
+                    case 'delhi': stockToCheck = data.delhi; break;
+                    default: stockToCheck = data.total; break;
                 }
                 
-                isBelowLimit = stockToCheck < settings.limit;
+                const isBelowLimit = stockToCheck < settings.limit;
+                if (isBelowLimit) lowStockAlert = true;
                 
                 const listItem = document.createElement('li');
                 listItem.className = `list-group-item d-flex justify-content-between align-items-center ${isBelowLimit ? 'list-group-item-danger' : ''}`;
-                
                 const typeText = settings.type.charAt(0).toUpperCase() + settings.type.slice(1);
 
-                listItem.innerHTML = `
-                    <div>
-                        <strong>${sku}</strong> 
-                        <span class="badge bg-secondary">${typeText} Limit: ${settings.limit}</span>
-                        <div class="small text-muted mt-1">
-                            SJIT Stock: <strong>${data.sjit.total}</strong> | Delhi Stock: <strong>${data.delhi}</strong>
-                        </div>
-                    </div>
-                    <button class="btn btn-sm btn-outline-danger" onclick="removeFromWatchlist('${sku}')"><i class="bi bi-x-lg"></i></button>
-                `;
+                listItem.innerHTML = `<div><strong>${sku}</strong><span class="badge bg-secondary ms-2">${typeText} Limit: ${settings.limit}</span><div class="small text-muted mt-1">SJIT Stock: <strong>${data.sjit.total}</strong> | Delhi Stock: <strong>${data.delhi}</strong></div></div><button class="btn btn-sm btn-outline-danger" onclick="removeFromWatchlist('${sku}')"><i class="bi bi-x-lg"></i></button>`;
                 listElement.appendChild(listItem);
-
-                if(isBelowLimit) {
-                    lowStockAlert = true;
-                }
             }
             
-            const dot = document.querySelector('.notification-dot');
-            dot.style.display = lowStockAlert ? 'inline-block' : 'none';
+            document.querySelector('.notification-dot').style.display = lowStockAlert ? 'inline-block' : 'none';
 
             if (lowStockAlert && Notification.permission === 'granted') {
                 const lowStockSkus = [...watchlist.entries()].filter(([sku, settings]) => {
                      const data = inventoryData.get(sku) || createEmptyInventoryRecord();
                      let stockToCheck;
-                      switch(settings.type) {
-                        case 'sjit': stockToCheck = data.sjit.total; break;
-                        case 'delhi': stockToCheck = data.delhi; break;
-                        default: stockToCheck = data.total; break;
-                    }
+                      switch(settings.type) { case 'sjit': stockToCheck = data.sjit.total; break; case 'delhi': stockToCheck = data.delhi; break; default: stockToCheck = data.total; break; }
                     return stockToCheck < settings.limit;
                 });
-                const skuList = lowStockSkus.map(([sku, settings]) => `${sku} (${settings.type} stock is low)`).join(', ');
-                new Notification('Low Stock Alert!', {
-                    body: `Attention needed for: ${skuList}`,
-                    icon: 'https://cdn-icons-png.flaticon.com/512/1533/1533630.png'
-                });
+                new Notification('Low Stock Alert!', { body: `Attention needed for: ${lowStockSkus.map(([s]) => s).join(', ')}` });
             }
         }
         
+        // --- LOCAL STORAGE ---
         function loadFromLocalStorage() {
-            const savedInventory = localStorage.getItem('inventoryData');
-            const savedWatchlist = localStorage.getItem('watchlist');
-
-            if (savedInventory) {
-                try {
+            try {
+                const savedInventory = localStorage.getItem('inventoryData');
+                if (savedInventory) {
                     inventoryData = new Map(JSON.parse(savedInventory));
                     if (inventoryData.size > 0) {
                         renderInventoryTable();
                         showToast('Info', 'Loaded saved data from your last session.', 'info');
                     }
-                } catch(e) {
-                    console.error("Failed to parse inventory data from localStorage", e);
-                    localStorage.removeItem('inventoryData');
                 }
-            }
-
-            if (savedWatchlist) {
-                try {
+                const savedWatchlist = localStorage.getItem('watchlist');
+                if (savedWatchlist) {
                     watchlist = new Map(JSON.parse(savedWatchlist));
-                     if (watchlist.size > 0) {
-                        updateWatchlistDisplay();
-                    }
-                } catch(e) {
-                    console.error("Failed to parse watchlist data from localStorage", e);
-                    localStorage.removeItem('watchlist');
+                    if (watchlist.size > 0) updateWatchlistDisplay();
                 }
-
+            } catch(e) {
+                console.error("Failed to parse data from localStorage", e);
+                localStorage.clear(); // Clear corrupted data
             }
         }
-        
-        window.addEventListener('load', () => {
-            loadMasterSkuFile(); 
-            loadFromLocalStorage();
-            if ('Notification' in window) {
-                Notification.requestPermission();
-            }
-        });
-
     </script>
 </body>
 </html>
